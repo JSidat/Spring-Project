@@ -1,0 +1,1 @@
+INSERT INTO `book` (`title`, `author`, `genre`) VALUES ('Born to run', 'Christopher Mcdougal', 'Sports');
