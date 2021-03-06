@@ -19,7 +19,7 @@ public class BookController {
 		this.service = service;
 	}
 
-	@PostMapping("/create")
+	@PostMapping("/createBook")
 	public ResponseEntity<Book> createBook(@RequestBody Book book) {
 		return new ResponseEntity<Book>(this.service.createBook(book), HttpStatus.CREATED);
 	}
