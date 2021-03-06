@@ -8,4 +8,6 @@ import com.bae.starterproject.domain.Book;
 @Repository
 public interface BookRepo extends JpaRepository<Book, Long> {
 
+	Book findByTitle(String title);
+
 }
