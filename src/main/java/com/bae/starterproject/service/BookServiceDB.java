@@ -24,7 +24,7 @@ public class BookServiceDB implements BookService {
 	}
 
 	@Override
-	public List<Book> getBook() {
+	public List<Book> getBooks() {
 		return this.repo.findAll();
 	}
 

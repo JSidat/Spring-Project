@@ -30,7 +30,7 @@ public class BookController {
 
 	@GetMapping("/getBooks")
 	public ResponseEntity<List<Book>> getBooks() {
-		return ResponseEntity.ok(this.service.getBook());
+		return ResponseEntity.ok(this.service.getBooks());
 	}
 
 	@GetMapping("/getBookById/{id}")
