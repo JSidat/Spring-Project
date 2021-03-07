@@ -63,4 +63,14 @@ public class BookServiceDBTest {
 		Mockito.verify(this.repo, Mockito.times(1)).save(updatedBook);
 	}
 
+	@Test
+	void deleteTest() {
+		Long id = 1L;
+
+		this.repo.deleteById(id);
+
+		assertThat(this.repo.count()).isZero();
+
+	}
+
 }

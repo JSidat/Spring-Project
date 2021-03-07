@@ -1,5 +1,6 @@
 package com.bae.starterproject.rest;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -110,6 +111,16 @@ public class BookControllerIntegrationTest {
 
 		ResultMatcher checkStatus = status().isOk();
 		ResultMatcher checkBody = content().json(updatedBookAsJSON);
+
+		this.mockMvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
+	}
+
+	@Test
+	void deleteTest() throws Exception {
+		RequestBuilder mockRequest = delete("/removeBook/1");
+
+		ResultMatcher checkStatus = status().isOk();
+		ResultMatcher checkBody = content().string("true");
 
 		this.mockMvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}

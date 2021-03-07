@@ -51,4 +51,10 @@ public class BookServiceDB implements BookService {
 		return this.repo.save(existing);
 	}
 
+	@Override
+	public Boolean deleteBook(Long id) {
+		this.repo.deleteById(id);
+		return !this.repo.existsById(id);
+	}
+
 }
