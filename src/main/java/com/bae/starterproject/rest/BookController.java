@@ -38,7 +38,7 @@ public class BookController {
 		return this.service.getBookById(id);
 	}
 
-	@GetMapping("/getBookByName/{title}")
+	@GetMapping("/getBookByTitle/{title}")
 	public Book getBookByTitle(@PathVariable String title) {
 		return this.service.getBookByTitle(title);
 	}

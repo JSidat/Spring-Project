@@ -70,4 +70,32 @@ public class BookControllerIntegrationTest {
 
 		this.mockMvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
+
+	@Test
+	void readByIdTest() throws Exception {
+		Book newBook = new Book(1L, "Born to run", "Christopher Mcdougal", "Sports");
+		String newBookAsJSON = this.mapper.writeValueAsString(newBook);
+
+		RequestBuilder mockRequst = get("/getBookById/1");
+
+		ResultMatcher CheckStatus = status().isOk();
+		ResultMatcher CheckBody = content().json(newBookAsJSON);
+
+		this.mockMvc.perform(mockRequst).andExpect(CheckStatus).andExpect(CheckBody);
+
+	}
+
+	@Test
+	void readByNameTest() throws Exception {
+		Book newBook = new Book(1L, "Born to run", "Christopher Mcdougal", "Sports");
+		String newBookAsJSON = this.mapper.writeValueAsString(newBook);
+
+		RequestBuilder mockRequst = get("/getBookByTitle/Born to run");
+
+		ResultMatcher CheckStatus = status().isOk();
+		ResultMatcher CheckBody = content().json(newBookAsJSON);
+
+		this.mockMvc.perform(mockRequst).andExpect(CheckStatus).andExpect(CheckBody);
+
+	}
 }
