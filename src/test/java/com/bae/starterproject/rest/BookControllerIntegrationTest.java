@@ -1,8 +1,11 @@
 package com.bae.starterproject.rest;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +55,19 @@ public class BookControllerIntegrationTest {
 
 		this.mockMvc.perform(mockRequest).andExpect(matchStatus).andExpect(matchBody);
 
+	}
+
+	@Test
+	void readTest() throws Exception {
+		Book newBook = new Book(1L, "Born to run", "Christopher Mcdougal", "Sports");
+		List<Book> allBooks = List.of(newBook);
+		String newBookAsJSON = this.mapper.writeValueAsString(allBooks);
+
+		RequestBuilder mockRequest = get("/getBooks");
+
+		ResultMatcher checkStatus = status().isOk();
+		ResultMatcher checkBody = content().json(newBookAsJSON);
+
+		this.mockMvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
 }
