@@ -14,4 +14,6 @@ public interface BookService {
 
 	Book getBookByTitle(String title);
 
+	Book updateBook(Long id, Book book);
+
 }

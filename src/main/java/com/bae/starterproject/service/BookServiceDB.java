@@ -39,4 +39,16 @@ public class BookServiceDB implements BookService {
 		return this.repo.findByTitle(title);
 	}
 
+	@Override
+	public Book updateBook(Long id, Book newBook) {
+		Optional<Book> optionalBook = this.repo.findById(id);
+		Book existing = optionalBook.get();
+
+		existing.setTitle(newBook.getTitle());
+		existing.setAuthor(newBook.getAuthor());
+		existing.setGenre(newBook.getGenre());
+
+		return this.repo.save(existing);
+	}
+
 }

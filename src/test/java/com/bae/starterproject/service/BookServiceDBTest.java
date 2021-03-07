@@ -3,6 +3,7 @@ package com.bae.starterproject.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -43,6 +44,23 @@ public class BookServiceDBTest {
 		Mockito.when(this.repo.findAll()).thenReturn(allBooks);
 
 		assertThat(this.service.getBooks().equals(allBooks));
+	}
+
+	@Test
+	void updateTest() {
+		Long id = 1L;
+
+		Book newBook = new Book("Born to run", "Christopher Mcdougal", "Running");
+		Optional<Book> optionalBook = Optional.of(new Book(id, "Born to run", "Christopher Mcdougal", "Sports"));
+		Book updatedBook = new Book(id, newBook.getTitle(), newBook.getAuthor(), newBook.getGenre());
+
+		Mockito.when(this.repo.findById(id)).thenReturn(optionalBook);
+		Mockito.when(this.repo.save(updatedBook)).thenReturn(updatedBook);
+
+		assertThat(this.service.updateBook(id, newBook)).isEqualTo(updatedBook);
+
+		Mockito.verify(this.repo, Mockito.times(1)).findById(id);
+		Mockito.verify(this.repo, Mockito.times(1)).save(updatedBook);
 	}
 
 }
