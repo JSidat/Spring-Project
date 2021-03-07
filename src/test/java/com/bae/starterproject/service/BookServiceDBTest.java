@@ -63,4 +63,12 @@ public class BookServiceDBTest {
 		Mockito.verify(this.repo, Mockito.times(1)).save(updatedBook);
 	}
 
+	@Test
+	void deleteTest() {
+		Long id = 1L;
+
+		assertThat(this.service.deleteBook(id)).isEqualTo(true);
+
+	}
+
 }
