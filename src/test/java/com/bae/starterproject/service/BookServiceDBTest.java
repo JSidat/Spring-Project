@@ -2,6 +2,8 @@ package com.bae.starterproject.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,16 @@ public class BookServiceDBTest {
 
 		assertThat(this.service.createBook(newBook)).isEqualTo(savedBook);
 		Mockito.verify(this.repo, Mockito.times(1)).save(newBook);
+	}
+
+	@Test
+	void testRead() {
+		Book savedBook = new Book(1L, "Born to run", "Christopher Mcdougal", "Sports");
+		List<Book> allBooks = List.of(savedBook);
+
+		Mockito.when(this.repo.findAll()).thenReturn(allBooks);
+
+		assertThat(this.service.getBooks().equals(allBooks));
 	}
 
 }
