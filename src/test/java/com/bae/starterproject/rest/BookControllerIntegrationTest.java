@@ -2,6 +2,7 @@ package com.bae.starterproject.rest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -97,5 +98,19 @@ public class BookControllerIntegrationTest {
 
 		this.mockMvc.perform(mockRequst).andExpect(CheckStatus).andExpect(CheckBody);
 
+	}
+
+	@Test
+	void updateTest() throws Exception {
+		Book updatedBook = new Book(1L, "Born to run", "Christopher Mcdougal", "Running");
+		String updatedBookAsJSON = this.mapper.writeValueAsString(updatedBook);
+
+		RequestBuilder mockRequest = put("/updateBook/1").contentType(MediaType.APPLICATION_JSON)
+				.content(updatedBookAsJSON);
+
+		ResultMatcher checkStatus = status().isOk();
+		ResultMatcher checkBody = content().json(updatedBookAsJSON);
+
+		this.mockMvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
 }
