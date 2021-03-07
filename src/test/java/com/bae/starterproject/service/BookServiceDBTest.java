@@ -67,7 +67,9 @@ public class BookServiceDBTest {
 	void deleteTest() {
 		Long id = 1L;
 
-		assertThat(this.service.deleteBook(id)).isEqualTo(true);
+		this.repo.deleteById(id);
+
+		assertThat(this.repo.count()).isZero();
 
 	}
 
