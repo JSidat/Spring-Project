@@ -67,10 +67,18 @@ public class BookServiceDBTest {
 	void deleteTest() {
 		Long id = 1L;
 
-		this.repo.deleteById(id);
+		Mockito.when(this.repo.existsById(id)).thenReturn(false);
 
-		assertThat(this.repo.count()).isZero();
+		assertThat(this.service.deleteBook(id)).isTrue();
 
+	}
+
+	@Test
+	void invalidDeleteTest() {
+		Long id = 1L;
+
+		Mockito.when(this.repo.existsById(id)).thenReturn(true);
+		assertThat(this.service.deleteBook(id)).isFalse();
 	}
 
 }
