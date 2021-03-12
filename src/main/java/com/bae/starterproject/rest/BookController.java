@@ -52,7 +52,7 @@ public class BookController {
 		return this.service.updateBook(id, newBook);
 	}
 
-	@DeleteMapping("removeBook/{id}")
+	@DeleteMapping("/removeBook/{id}")
 	public Boolean removeBook(@PathVariable Long id) {
 		return this.service.deleteBook(id);
 	}
