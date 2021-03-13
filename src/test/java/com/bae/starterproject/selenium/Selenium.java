@@ -9,6 +9,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Selenium {
 
@@ -50,7 +52,7 @@ public class Selenium {
 
 		WebElement card = this.driver.findElement(By.xpath("//*[@id=\"output\"]"));
 
-		Assertions.assertTrue(card.getText().contains("Java for Dummies"));
+		Assertions.assertTrue(card.getText().contains("Edit"));
 	}
 
 	@Test
@@ -81,6 +83,10 @@ public class Selenium {
 
 		closeModal.click();
 
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"output\"]/div[1]")));
+
 		WebElement topCard = this.driver.findElement(By.xpath("//*[@id=\"output\"]/div[1]"));
 
 		Assertions.assertTrue(topCard.getText().contains("Java for a dummy"));
@@ -95,9 +101,9 @@ public class Selenium {
 
 		deleteButton.click();
 
-		WebElement output = this.driver.findElement(By.xpath("//*[@id=\"output\"]"));
+		WebElement output = this.driver.findElement(By.xpath("/html"));
 
-		Assertions.assertFalse(output.getText().contains("Java for Dummies"));
+		Assertions.assertTrue(output.getText().contains("Book Deleted"));
 	}
 
 	@AfterEach
